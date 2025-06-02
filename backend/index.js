@@ -5,6 +5,7 @@ import connectDB from './config/db.js';
 import customerRoutes from './routes/customerRoutes.js';
 import confirmationRoutes from './routes/confirmationRoutes.js';  
 import policyRoutes from './routes/policyRoutes.js';
+import Razorpay from 'razorpay';
 
 
 dotenv.config();
@@ -13,6 +14,28 @@ connectDB();
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+
+const razorpay = new Razorpay({
+  key_id: "rzp_live_G8xxtyxOLZ2K4T",
+  key_secret: "VhFMW4X2FrQEIOtqzc5IELgf",
+});
+
+app.post('/create-order', async (req, res) => {
+  try {
+    const options = {
+      amount: req.body.amount * 100, // amount in smallest currency unit
+      currency: 'INR',
+      receipt: 'receipt_order_74394',
+    };
+
+    const order = await razorpay.orders.create(options);
+    res.status(200).json(order);
+  } catch (err) {
+    console.error('Error creating Razorpay order:', err);
+    res.status(500).send('Something went wrong');
+  }
+});
 app.use('/api/customers', customerRoutes);
 app.use('/api/confirmations', confirmationRoutes);
 app.use('/api/policies', policyRoutes);
