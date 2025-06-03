@@ -1,4 +1,4 @@
-import Policy from '../models/policy.js';
+import Policy from '../models/Policy.js';
 import Customer from '../models/Customer.js';
 import Confirmation from '../models/confirmation.js';
 
