@@ -14,7 +14,7 @@ const app = express();
 
 // ✅ Allow frontend domain (e.g., Netlify, Vercel)
 app.use(cors({
-  origin: "https://localhost:5174/,
+  origin: "https://localhost:5174/",
   credentials: true,
 }));
 
