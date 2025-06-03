@@ -14,7 +14,7 @@ const app = express();
 
 // ✅ Allow frontend domain (e.g., Netlify, Vercel)
 app.use(cors({
-  origin:"https://96hydm-5174.csb.app",
+  origin:"https://96hydm-5173.csb.app",
   credentials: true,
 }));
 
